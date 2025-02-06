@@ -3,7 +3,7 @@
 setup:
 	mkdir -p code-server-config prefect
 	chmod +x custom-init.sh
-	docker-compose up -d
+	docker-compose up --build -d
 
 start:
 	@echo "Access code-server at http://$$(grep VM_IP .env | cut -d'=' -f2):8443"

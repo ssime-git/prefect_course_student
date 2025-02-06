@@ -9,7 +9,7 @@ services:
       - TZ=Etc/UTC
       - PASSWORD=password
       - DEFAULT_WORKSPACE=/config/workspace
-      - PREFECT_UI_API_URL=http://${VM_IP}:4200/api
+      - PREFECT_API_URL=http://${VM_IP}:4200/api
       - PREFECT_SERVER_API_HOST=0.0.0.0
     volumes:
       - ./code-server-config:/config
