@@ -1,3 +1,4 @@
+version: "3.8"
 services:
   code-server:
     image: lscr.io/linuxserver/code-server@sha256:c181b7a2ae59940f276c89fd86cd4f220cdb87886d771b5becf3d4156b3c0bc1
@@ -6,16 +7,17 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - PASSWORD=password # change the password if you want
+      - PASSWORD=password               # Change to a secure password
       - DEFAULT_WORKSPACE=/config/workspace
-      - PREFECT_UI_API_URL=http://0.0.0.0:4200/api
+      - PREFECT_UI_API_URL=http://34.240.199.59:4200/api
       - PREFECT_SERVER_API_HOST=0.0.0.0
     volumes:
       - ./code-server-config:/config
-      - ./prefect:/config/workspace  # Mounting only the prefect folder into code server
+      - ./prefect:/config/workspace       # Mount your Prefect folder into code-server
       - ./custom-init.sh:/custom-cont-init.d/setup.sh
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
     ports:
-      - 8443:8443
+      - "8443:8443"
+      - "4200:4200"
     restart: unless-stopped

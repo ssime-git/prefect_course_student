@@ -1,10 +1,10 @@
 create-config:
-    mkdir code-server-config
-    
+	mkdir code-server-config
+
 setup:
-    sudo chmod -R 755 code-server-config
-    chmod +x custom-init.sh
-    docker-compose up -d
+	sudo chmod -R 755 code-server-config
+	chmod +x custom-init.sh
+	docker-compose up -d
 
 go:
-    cd prefect
+	cd prefect

@@ -1,8 +1,0 @@
-2025-02-06 09:27:15.724 [info] 
-
-
-
-
-2025-02-06 09:27:15.742 [info] Extension host agent started.
-2025-02-06 09:27:15.821 [error] [81.65.151.215][99595234][ExtensionHostConnection] Unknown reconnection token (never seen).
-2025-02-06 09:27:16.482 [error] [81.65.151.215][5243ae68][ManagementConnection] Unknown reconnection token (never seen).
