@@ -8,6 +8,8 @@ services:
       - TZ=Etc/UTC
       - PASSWORD=password # change the password if you want
       - DEFAULT_WORKSPACE=/config/workspace
+      - PREFECT_UI_API_URL=http://0.0.0.0:4200/api
+      - PREFECT_SERVER_API_HOST=0.0.0.0
     volumes:
       - ./code-server-config:/config
       - ./prefect:/config/workspace  # Mounting only the prefect folder into code server
