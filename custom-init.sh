@@ -27,5 +27,4 @@ su abc -c "git config --global init.defaultBranch main"
 su abc -c "git config --global core.editor 'code --wait'"
 
 # Create a venv and install Python using uv (as user abc)
-# Uncomment to automatically create a venv
-# su abc -c "cd /config/workspace && uv venv"
+su abc -c "cd /config/workspace && uv venv"
