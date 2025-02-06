@@ -1,0 +1,11 @@
+2025-02-06 09:20:59.220 [info] 
+
+
+
+
+2025-02-06 09:20:59.242 [info] Extension host agent started.
+2025-02-06 09:20:59.280 [info] Started initializing default profile extensions in extensions installation folder. file:///config/extensions
+2025-02-06 09:20:59.304 [info] Completed initializing default profile extensions in extensions installation folder. file:///config/extensions
+2025-02-06 09:21:10.299 [info] [81.65.151.215][5243ae68][ManagementConnection] New connection established.
+2025-02-06 09:21:11.678 [info] [81.65.151.215][99595234][ExtensionHostConnection] New connection established.
+2025-02-06 09:21:11.922 [info] [81.65.151.215][99595234][ExtensionHostConnection] <1329> Launched Extension Host Process.

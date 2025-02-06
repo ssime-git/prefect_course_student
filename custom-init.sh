@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Fix permissions for the config directory
+chown -R abc:abc /config
+chmod -R 755 /config
+
 # Update package list and install essential dependencies
 apt-get update
 apt-get install -y \
@@ -7,16 +11,21 @@ apt-get install -y \
     curl \
     build-essential
 
-# Install uv
-curl -LsSf https://astral.sh/uv/install.sh | sh
+# Get docker GID from the mounted socket and add abc user to it
+DOCKER_GID=$(stat -c '%g' /var/run/docker.sock)
+groupadd -g ${DOCKER_GID} docker || true  # 'true' prevents error if group exists
+usermod -aG docker abc
 
-# Add uv to PATH
-echo 'export PATH="/root/.cargo/bin:$PATH"' >> /etc/bash.bashrc
+# Install uv (now as user abc to avoid permission issues)
+curl -LsSf https://astral.sh/uv/install.sh | su abc -c "sh"
 
-# Configure git
-git config --global init.defaultBranch main
-git config --global core.editor "code --wait"
+# Add uv to PATH for all users
+echo 'export PATH="/config/.cargo/bin:$PATH"' >> /etc/bash.bashrc
 
-# Create a venv and install Python using uv
-# Uncomment if you need it automatically
-# su abc -c "uv venv"
+# Configure git (as user abc)
+su abc -c "git config --global init.defaultBranch main"
+su abc -c "git config --global core.editor 'code --wait'"
+
+# Create a venv and install Python using uv (as user abc)
+# Uncomment to automatically create a venv
+# su abc -c "cd /config/workspace && uv venv"

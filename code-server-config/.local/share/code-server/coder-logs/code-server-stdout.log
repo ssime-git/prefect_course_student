@@ -1,0 +1,50 @@
+[2025-02-06T09:12:19.862Z] info  code-server 4.96.2 08cbdfbdf11925e8a14ee03de97b942bba7e8a94
+[2025-02-06T09:12:19.865Z] info  Using user-data-dir /config/data
+[2025-02-06T09:12:19.894Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-02-06T09:12:19.894Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-02-06T09:12:19.894Z] info    - Authentication is enabled
+[2025-02-06T09:12:19.895Z] info      - Using password from $PASSWORD
+[2025-02-06T09:12:19.895Z] info    - Not serving HTTPS
+[2025-02-06T09:12:19.895Z] info  Session server listening on /config/data/code-server-ipc.sock
+[09:20:59] 
+
+
+
+
+[09:20:59] Extension host agent started.
+[09:20:59] Started initializing default profile extensions in extensions installation folder. file:///config/extensions
+[09:20:59] Completed initializing default profile extensions in extensions installation folder. file:///config/extensions
+[09:21:10] [81.65.151.215][5243ae68][ManagementConnection] New connection established.
+[09:21:11] [81.65.151.215][99595234][ExtensionHostConnection] New connection established.
+[09:21:11] [81.65.151.215][99595234][ExtensionHostConnection] <1329> Launched Extension Host Process.
+[2025-02-06T09:26:53.509Z] info  code-server 4.96.2 08cbdfbdf11925e8a14ee03de97b942bba7e8a94
+[2025-02-06T09:26:53.513Z] info  Using user-data-dir /config/data
+[2025-02-06T09:26:53.546Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-02-06T09:26:53.546Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-02-06T09:26:53.546Z] info    - Authentication is enabled
+[2025-02-06T09:26:53.546Z] info      - Using password from $PASSWORD
+[2025-02-06T09:26:53.546Z] info    - Not serving HTTPS
+[2025-02-06T09:26:53.546Z] info  Session server listening on /config/data/code-server-ipc.sock
+[09:27:15] 
+
+
+
+
+[09:27:15] Extension host agent started.
+[2025-02-06T09:28:03.262Z] info  code-server 4.96.2 08cbdfbdf11925e8a14ee03de97b942bba7e8a94
+[2025-02-06T09:28:03.265Z] info  Using user-data-dir /config/data
+[2025-02-06T09:28:03.289Z] info  Using config file /config/.config/code-server/config.yaml
+[2025-02-06T09:28:03.290Z] info  HTTP server listening on http://0.0.0.0:8443/
+[2025-02-06T09:28:03.290Z] info    - Authentication is enabled
+[2025-02-06T09:28:03.290Z] info      - Using password from $PASSWORD
+[2025-02-06T09:28:03.290Z] info    - Not serving HTTPS
+[2025-02-06T09:28:03.290Z] info  Session server listening on /config/data/code-server-ipc.sock
+[09:28:03] 
+
+
+
+
+[09:28:03] Extension host agent started.
+[09:28:04] [81.65.151.215][39ece7ef][ManagementConnection] New connection established.
+[09:28:05] [81.65.151.215][76fdcaea][ExtensionHostConnection] New connection established.
+[09:28:06] [81.65.151.215][76fdcaea][ExtensionHostConnection] <1934> Launched Extension Host Process.
