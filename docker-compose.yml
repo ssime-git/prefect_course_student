@@ -10,7 +10,7 @@ services:
       - DEFAULT_WORKSPACE=/config/workspace
     volumes:
       - ./code-server-config:/config
-      - .:/config/workspace  # Mounting this local folder into code server
+      - ./prefect:/config/workspace  # Mounting only the prefect folder into code server
       - ./custom-init.sh:/custom-cont-init.d/setup.sh
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
