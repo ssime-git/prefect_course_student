@@ -7,13 +7,13 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - PASSWORD=password               # Change to a secure password
+      - PASSWORD=password
       - DEFAULT_WORKSPACE=/config/workspace
-      - PREFECT_UI_API_URL=http://34.240.199.59:4200/api
+      - PREFECT_UI_API_URL=http://${VM_IP}:4200/api
       - PREFECT_SERVER_API_HOST=0.0.0.0
     volumes:
       - ./code-server-config:/config
-      - ./prefect:/config/workspace       # Mount your Prefect folder into code-server
+      - ${WORKSPACE_DIR}:/config/workspace
       - ./custom-init.sh:/custom-cont-init.d/setup.sh
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker

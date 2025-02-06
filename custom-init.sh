@@ -1,37 +1,84 @@
 #!/bin/bash
 
+# Function to wait for command and proper setup
+wait_for_command() {
+    local cmd=$1
+    local timeout=$2
+    local start_time=$(date +%s)
+    
+    echo "Waiting for $cmd to be available..."
+    while ! su abc -c "command -v $cmd" &> /dev/null; do
+        current_time=$(date +%s)
+        if [ $((current_time - start_time)) -ge $timeout ]; then
+            echo "Timeout waiting for $cmd"
+            return 1
+        fi
+        sleep 1
+    done
+    echo "$cmd is now available"
+    return 0
+}
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+}
+
 # Fix permissions for the config directory
+log "Setting up permissions"
 chown -R abc:abc /config
 chmod -R 755 /config
 
 # Update package list and install essential dependencies
-apt-get update
-apt-get install -y \
+log "Installing dependencies"
+apt-get update && apt-get install -y \
     git \
     curl \
     build-essential
 
 # Get docker GID from the mounted socket and add abc user to it
+log "Setting up Docker access"
 DOCKER_GID=$(stat -c '%g' /var/run/docker.sock)
 groupadd -g ${DOCKER_GID} docker || true
 usermod -aG docker abc
 
 # Create necessary directories
-mkdir -p /config/.cargo
-chown -R abc:abc /config/.cargo
+log "Setting up uv installation"
+mkdir -p /config/.local/bin
+chown -R abc:abc /config/.local
 
-# Install uv with better error handling
-curl -LsSf https://astral.sh/uv/install.sh > /tmp/install_uv.sh
-chmod +x /tmp/install_uv.sh
-su abc -c "bash /tmp/install_uv.sh"
+# Install uv for abc user
+log "Installing uv"
+su abc -c 'curl -LsSf https://astral.sh/uv/install.sh | sh'
+echo 'export PATH="/config/.local/bin:$PATH"' >> /config/.bashrc
+echo 'source $HOME/.local/bin/env' >> /config/.bashrc
 
-# Add uv to PATH for all users (modified to use the correct path)
-echo 'export PATH="/config/.cargo/bin:$PATH"' >> /etc/bash.bashrc
-echo 'export PATH="/config/.cargo/bin:$PATH"' >> /config/.bashrc
+# Wait for uv to be available
+wait_for_command "uv" 30
 
-# Configure git (as user abc)
+# Configure git
+log "Configuring git"
 su abc -c "git config --global init.defaultBranch main"
 su abc -c "git config --global core.editor 'code --wait'"
 
-# Create a venv and install Python using uv (as user abc)
-su abc -c "cd /config/workspace && uv venv && . .venv/bin/activate && uv pip install --system prefect"
+# Setup Python environment
+log "Setting up Python environment"
+su abc -c "cd /config/workspace && \
+    source /config/.bashrc && \
+    uv venv && \
+    . .venv/bin/activate && \
+    [ -f pyproject.toml ] && uv pip install -e . || uv pip install prefect"
+
+# Create helper script for Prefect
+log "Creating Prefect helper script"
+cat > /config/workspace/start_prefect.sh << 'EOF'
+#!/bin/bash
+cd /config/workspace
+source .venv/bin/activate
+export PREFECT_API_URL=http://0.0.0.0:4200/api
+prefect server start --host 0.0.0.0 --port 4200
+EOF
+
+chmod +x /config/workspace/start_prefect.sh
+chown abc:abc /config/workspace/start_prefect.sh
+
+log "Setup complete!"
